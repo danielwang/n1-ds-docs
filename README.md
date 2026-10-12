@@ -1,8 +1,8 @@
-# N1 DS Docs
+# nebulaONE Docs
 
-A documentation website built with [Docusaurus](https://docusaurus.io/) (TypeScript). Content is written in
-Markdown, the sidebar is generated automatically from the `docs/` folder, and the site is deployed to
-GitHub Pages via GitHub Actions.
+Documentation website for the **nebulaONE** design system, built with [Docusaurus](https://docusaurus.io/)
+(TypeScript). Content is written in Markdown, the sidebar is generated automatically from the `docs/`
+folder, and the site is deployed to GitHub Pages via GitHub Actions.
 
 > **Note:** This repository is configured for `https://danielwang.github.io/n1-ds-docs/`. If you fork or
 > rename this repository, update `url`, `baseUrl`, `organizationName`, and `projectName` in
@@ -51,14 +51,27 @@ npm run clear        # Clear the Docusaurus build cache
 
 ## Adding documentation pages
 
-1. Add a new Markdown file under [`docs/`](./docs) (nest it in a subfolder to group it with related pages,
-   e.g. `docs/guides/`).
-2. Add frontmatter with at least a `title` (and optionally `sidebar_position` to control ordering):
+Docs are grouped into four top-level sidebar categories under [`docs/`](./docs):
+
+```
+docs/
+  overview/         Introduction (docs landing page) and getting started
+  foundations/      Design principles (color, typography, spacing, ...)
+  ui-components/    Individual component documentation
+  design-tokens/    Token reference (color, spacing, radius, ...)
+```
+
+To add a new page:
+
+1. Add a new Markdown file under the relevant subfolder (or create a new subfolder for a new top-level
+   category).
+2. Add frontmatter with at least a `title` (and optionally `sidebar_position` to control ordering within
+   its category):
 
    ```md
    ---
    title: My New Page
-   sidebar_position: 3
+   sidebar_position: 2
    ---
 
    # My New Page
@@ -67,11 +80,13 @@ npm run clear        # Clear the Docusaurus build cache
    ```
 
 3. That's it — the sidebar in [`sidebars.ts`](./sidebars.ts) is configured to auto-generate navigation from
-   the `docs/` folder structure, so no manual sidebar entry is required. To group several pages under a
-   collapsible category, add a `_category_.json` file to that subfolder (see
-   [`docs/guides/_category_.json`](./docs/guides/_category_.json) for an example).
-4. Link between docs using relative paths (e.g. `[Getting Started](../getting-started.md)`) so links keep
-   working regardless of the site's base URL.
+   the `docs/` folder structure, so no manual sidebar entry is required. Each top-level subfolder becomes a
+   collapsible sidebar category; its label and order come from a `_category_.json` file in that folder
+   (see [`docs/overview/_category_.json`](./docs/overview/_category_.json) for an example). A new subfolder
+   needs its own `_category_.json` and at least one Markdown file to appear in the sidebar.
+4. Link between docs using relative paths (e.g.
+   `[Getting Started](../overview/getting-started.md)`) so links keep working regardless of the site's
+   base URL.
 5. Place images and other static files in [`static/`](./static) and reference them with a root-relative
    path, e.g. `/img/my-image.png` — Docusaurus automatically rewrites these for the configured `baseUrl`
    when they appear in Markdown.
@@ -92,6 +107,7 @@ npm run clear        # Clear the Docusaurus build cache
 
 ```
 docs/                   Documentation pages (Markdown), sidebar auto-generated from this folder
+                        (overview/, foundations/, ui-components/, design-tokens/)
 src/pages/               Standalone React pages (e.g. the homepage)
 src/components/          Reusable React components used by pages
 src/css/custom.css       Global theme customizations (keeps Docusaurus's light/dark Infima theme)

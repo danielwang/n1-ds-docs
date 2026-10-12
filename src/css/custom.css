@@ -4,27 +4,39 @@
  * work well for content-centric websites.
  */
 
+/*
+ * Brand variables below are sourced from nebulaone.com: the "Public Sans"
+ * typeface, the brand purple accent (--brand--purple: #3d52a5), the
+ * near-black used for headings and CTA buttons (#141609), and the fully
+ * rounded "pill" button shape used across the marketing site.
+ */
+
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #3d52a5;
+  --ifm-color-primary-dark: #364992;
+  --ifm-color-primary-darker: #2f3f80;
+  --ifm-color-primary-darkest: #212d5b;
+  --ifm-color-primary-light: #445bb8;
+  --ifm-color-primary-lighter: #556bc0;
+  --ifm-color-primary-lightest: #7a8bce;
   --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'Public Sans', Arial, sans-serif;
+  --ifm-heading-color: #141609;
+  --ifm-button-border-radius: 2rem;
+  --ifm-footer-background-color: #141609;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #8b9bd6;
+  --ifm-color-primary-dark: #788bcf;
+  --ifm-color-primary-darker: #657bc9;
+  --ifm-color-primary-darkest: #425bb9;
+  --ifm-color-primary-light: #9eabdd;
+  --ifm-color-primary-lighter: #b1bbe3;
+  --ifm-color-primary-lightest: #d6dcf1;
+  --ifm-heading-color: #f0f0ee;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }

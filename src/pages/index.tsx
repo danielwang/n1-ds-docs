@@ -32,7 +32,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={siteConfig.title}
-      description="Documentation for the N1 DS project">
+      description="Documentation for the nebulaONE design system">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

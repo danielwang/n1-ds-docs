@@ -5,9 +5,17 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'N1 DS Docs',
-  tagline: 'Documentation for the N1 DS project',
+  title: 'nebulaONE',
+  tagline: 'Documentation for the nebulaONE design system',
   favicon: 'img/favicon.ico',
+
+  // Loads the nebulaONE brand typeface (Public Sans), matching nebulaone.com.
+  stylesheets: [
+    {
+      href: 'https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap',
+      type: 'text/css',
+    },
+  ],
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -66,10 +74,11 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'N1 DS Docs',
+      title: '',
       logo: {
-        alt: 'N1 DS Docs Logo',
-        src: 'img/logo.svg',
+        alt: 'nebulaONE',
+        src: 'img/logo.png',
+        srcDark: 'img/logo-dark.png',
       },
       items: [
         {to: '/', label: 'Home', position: 'left'},
@@ -98,7 +107,7 @@ const config: Config = {
             },
             {
               label: 'Getting Started',
-              to: '/docs/getting-started',
+              to: '/docs/overview/getting-started',
             },
           ],
         },
@@ -112,7 +121,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} N1 DS Docs. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} nebulaONE. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

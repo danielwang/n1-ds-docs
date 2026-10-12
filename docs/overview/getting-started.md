@@ -38,5 +38,6 @@ automatically as you edit files.
 
 ## Next steps
 
-Head over to the [Example Guide](./guides/example-guide.md) to see another
-sample documentation page, including common Markdown formatting.
+Head over to the [Example Component](../ui-components/example-component.md)
+page to see another sample documentation page, including common Markdown
+formatting.

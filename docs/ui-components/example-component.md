@@ -1,13 +1,14 @@
 ---
-id: example-guide
-title: Example Guide
+id: example-component
+title: Example Component
 sidebar_position: 1
 ---
 
-# Example Guide
+# Example Component
 
-This is a second example documentation page, grouped under a **Guides**
-category. Use it as a template for task-oriented, how-to style content.
+This is an example documentation page for the **UI Components** section.
+Use it as a template for documenting an individual component (props, usage,
+variants, accessibility notes, etc.).
 
 ## Markdown basics
 
@@ -32,10 +33,10 @@ Link to other docs using relative paths, so links keep working no matter
 where the site is hosted:
 
 ```md
-See the [Getting Started](../getting-started.md) guide for setup steps.
+See the [Getting Started](../overview/getting-started.md) guide for setup steps.
 ```
 
-See the [Getting Started](../getting-started.md) guide for setup steps.
+See the [Getting Started](../overview/getting-started.md) guide for setup steps.
 
 ## Adding images
 
