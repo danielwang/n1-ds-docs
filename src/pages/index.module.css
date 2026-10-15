@@ -4,15 +4,79 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
   position: relative;
+  padding: var(--ds-space-4xl) 0;
   overflow: hidden;
+  background: var(--ifm-background-color);
+}
+
+/* A faint dot grid nods to the token set's own 12-column grid without
+   reproducing any specific marketing-site graphic. Kept on a decorative
+   pseudo-element (rather than the banner's own background) so the mask
+   that fades it out never affects the real heading/button content. */
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--n1-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroBanner::after {
+    content: '';
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 420px;
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--ds-primary) 14%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+.heroContent {
+  position: relative;
+  max-width: 44rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: var(--ds-space-sm);
+  padding: var(--ds-space-3xs) var(--ds-space-md);
+  border-radius: var(--ds-radius-pill);
+  border: 1px solid var(--n1-border-strong);
+  background: var(--n1-surface);
+  color: var(--ifm-color-primary);
+  font-size: var(--ds-type-overline-size);
+  font-weight: var(--ds-font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin-bottom: var(--ds-space-md);
+  font-size: clamp(2.5rem, 2rem + 2vw, var(--ds-type-h1-size));
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.heroSubtitle {
+  margin: 0 auto var(--ds-space-xl);
+  max-width: 34rem;
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-subtitle1-size);
+  line-height: var(--ds-type-subtitle1-line);
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: var(--ds-space-2xl) var(--ds-space-md);
   }
 }
 
@@ -20,4 +84,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--ds-space-md);
+  flex-wrap: wrap;
 }

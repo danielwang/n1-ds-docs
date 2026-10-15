@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "tokens:sidebar": "node scripts/sidebar-tokens.mjs",
+    "tokens:global": "node scripts/generate-tokens.mjs",
+    "tokens": "npm run tokens:sidebar && npm run tokens:global",
+    "prestart": "npm run tokens",
+    "prebuild": "npm run tokens",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",

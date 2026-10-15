@@ -1,5 +1,6 @@
 {
   "label": "Overview",
+  "className": "sidebar-overview",
   "position": 1,
   "collapsed": true
 }

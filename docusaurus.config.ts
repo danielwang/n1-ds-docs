@@ -9,14 +9,6 @@ const config: Config = {
   tagline: 'Documentation for the nebulaONE design system',
   favicon: 'img/favicon.ico',
 
-  // Loads the nebulaONE brand typeface (Public Sans), matching nebulaone.com.
-  stylesheets: [
-    {
-      href: 'https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap',
-      type: 'text/css',
-    },
-  ],
-
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
@@ -66,6 +58,9 @@ const config: Config = {
   ],
 
   themeConfig: {
+    docs: {
+      sidebar: {hideable: true},
+    },
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
@@ -95,34 +90,9 @@ const config: Config = {
         },
       ],
     },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Introduction',
-              to: '/docs/',
-            },
-            {
-              label: 'Getting Started',
-              to: '/docs/overview/getting-started',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/danielwang/n1-ds-docs',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} nebulaONE. Built with Docusaurus.`,
-    },
+    // No `footer` config: Docusaurus renders nothing when it's absent
+    // (see @theme/Footer), which is the cleanest way to hide it entirely
+    // rather than shipping hidden markup via CSS.
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,

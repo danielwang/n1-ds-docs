@@ -1,5 +1,6 @@
 {
   "label": "Foundations",
+  "className": "sidebar-foundations",
   "position": 2,
   "collapsed": true
 }

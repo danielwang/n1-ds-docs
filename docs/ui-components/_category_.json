@@ -1,5 +1,6 @@
 {
   "label": "UI Components",
+  "className": "sidebar-components",
   "position": 3,
   "collapsed": true
 }

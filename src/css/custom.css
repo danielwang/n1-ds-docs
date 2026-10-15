@@ -1,42 +1,587 @@
+@import './tokens.css';
+@import './sidebar-tokens.css';
+
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Any CSS included here will be global. The classic template bundles Infima
+ * by default; Infima is a CSS framework designed to work well for
+ * content-centric websites. This file maps nebulaONE's own design tokens
+ * (generated into tokens.css by scripts/generate-tokens.mjs) onto Infima's
+ * variables, then layers enterprise-documentation styling — clear
+ * typographic hierarchy, disciplined content widths, a restrained colour
+ * system and subtle, purposeful interaction states — on top of the
+ * framework-rendered navbar, sidebar, docs and shared controls. (The site
+ * footer is intentionally disabled — see docusaurus.config.ts.)
  */
 
-/*
- * Brand variables below are sourced from nebulaone.com: the "Public Sans"
- * typeface, the brand purple accent (--brand--purple: #3d52a5), the
- * near-black used for headings and CTA buttons (#141609), and the fully
- * rounded "pill" button shape used across the marketing site.
- */
+/* ----------------------------------------------------------------------- */
+/* Colour system, mapped from design tokens to Infima variables            */
+/* ----------------------------------------------------------------------- */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #3d52a5;
-  --ifm-color-primary-dark: #364992;
-  --ifm-color-primary-darker: #2f3f80;
-  --ifm-color-primary-darkest: #212d5b;
-  --ifm-color-primary-light: #445bb8;
-  --ifm-color-primary-lighter: #556bc0;
-  --ifm-color-primary-lightest: #7a8bce;
-  --ifm-code-font-size: 95%;
-  --ifm-font-family-base: 'Public Sans', Arial, sans-serif;
-  --ifm-heading-color: #141609;
-  --ifm-button-border-radius: 2rem;
-  --ifm-footer-background-color: #141609;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Brand accent (color.brand.blue) drives links, primary buttons and
+     active states; darker/lighter steps are derived with color-mix so the
+     whole ramp stays anchored to the one token instead of hand-picked hex
+     values. */
+  --ifm-color-primary: var(--ds-primary);
+  --ifm-color-primary-dark: color-mix(in srgb, var(--ds-primary) 90%, black);
+  --ifm-color-primary-darker: color-mix(in srgb, var(--ds-primary) 80%, black);
+  --ifm-color-primary-darkest: color-mix(in srgb, var(--ds-primary) 65%, black);
+  --ifm-color-primary-light: color-mix(in srgb, var(--ds-primary) 90%, white);
+  --ifm-color-primary-lighter: color-mix(in srgb, var(--ds-primary) 80%, white);
+  --ifm-color-primary-lightest: color-mix(in srgb, var(--ds-primary) 60%, white);
+
+  /* Semantic status colours power admonitions, form feedback and the
+     .text--success/.text--danger/etc. utility classes. Infima computes
+     "-contrast-background"/"-contrast-foreground"/"-dark" variants at build
+     time rather than deriving them from the base colour at runtime, so each
+     is set explicitly from the matching token shade. */
+  --ifm-color-success: var(--ds-success-main);
+  --ifm-color-success-dark: var(--ds-success-dark);
+  --ifm-color-success-darker: var(--ds-success-dark);
+  --ifm-color-success-light: var(--ds-success-light);
+  --ifm-color-success-lighter: var(--ds-success-light);
+  --ifm-color-success-contrast-background: color-mix(in srgb, var(--ds-success-main) 12%, white);
+  --ifm-color-success-contrast-foreground: var(--ds-success-dark);
+
+  --ifm-color-warning: var(--ds-warning-main);
+  --ifm-color-warning-dark: var(--ds-warning-dark);
+  --ifm-color-warning-darker: var(--ds-warning-dark);
+  --ifm-color-warning-light: var(--ds-warning-light);
+  --ifm-color-warning-lighter: var(--ds-warning-light);
+  --ifm-color-warning-contrast-background: color-mix(in srgb, var(--ds-warning-main) 14%, white);
+  --ifm-color-warning-contrast-foreground: var(--ds-warning-dark);
+
+  --ifm-color-danger: var(--ds-error-main);
+  --ifm-color-danger-dark: var(--ds-error-dark);
+  --ifm-color-danger-darker: var(--ds-error-dark);
+  --ifm-color-danger-light: var(--ds-error-light);
+  --ifm-color-danger-lighter: var(--ds-error-light);
+  --ifm-color-danger-contrast-background: color-mix(in srgb, var(--ds-error-main) 12%, white);
+  --ifm-color-danger-contrast-foreground: var(--ds-error-dark);
+
+  --ifm-color-info: var(--ds-info-main);
+  --ifm-color-info-dark: var(--ds-info-dark);
+  --ifm-color-info-darker: var(--ds-info-dark);
+  --ifm-color-info-light: var(--ds-info-light);
+  --ifm-color-info-lighter: var(--ds-info-light);
+  --ifm-color-info-contrast-background: color-mix(in srgb, var(--ds-info-main) 12%, white);
+  --ifm-color-info-contrast-foreground: var(--ds-info-dark);
+
+  --ifm-background-color: var(--ds-white);
+  --ifm-background-surface-color: var(--ds-white);
+  --ifm-color-emphasis-100: var(--ds-grey-100);
+  --ifm-color-emphasis-200: var(--ds-grey-200);
+  --ifm-color-emphasis-300: var(--ds-grey-300);
+  --ifm-color-emphasis-400: var(--ds-grey-400);
+  --ifm-color-emphasis-600: var(--ds-grey-600);
+  --ifm-color-emphasis-700: var(--ds-grey-700);
+  --ifm-color-emphasis-800: var(--ds-grey-800);
+
+  --ifm-font-family-base: var(--ds-font-family);
+  --ifm-heading-font-family: var(--ds-font-family);
+  --ifm-font-family-monospace: var(--ds-font-family-mono);
+  --ifm-font-weight-bold: var(--ds-font-weight-bold);
+  --ifm-heading-font-weight: var(--ds-font-weight-bold);
+  --ifm-heading-color: var(--ds-grey-900);
+  --ifm-font-color-base: var(--ds-grey-800);
+
+  --ifm-code-font-size: 90%;
+  --ifm-code-background: var(--ds-grey-100);
+  --ifm-code-border-radius: var(--ds-radius-sm);
+  --ifm-pre-border-radius: var(--ds-radius-lg);
+
+  --ifm-global-radius: var(--ds-radius-md);
+  --ifm-button-border-radius: var(--ds-radius-pill);
+  --ifm-card-border-radius: var(--ds-radius-lg);
+  --ifm-alert-border-radius: var(--ds-radius-md);
+  --ifm-table-border-color: var(--ds-grey-300);
+
+  --ifm-container-width: 1200px;
+  --ifm-container-width-xl: 1400px;
+
+  --ifm-navbar-background-color: var(--ds-white);
+  --ifm-navbar-shadow: none;
+
+  --ifm-toc-border-color: var(--ds-grey-200);
+  --ifm-toc-link-color: var(--ds-grey-600);
+
+  --docusaurus-highlighted-code-line-bg: color-mix(in srgb, var(--ds-primary) 12%, transparent);
+
+  /* Shared surface tokens reused by component-level global rules below. */
+  --n1-surface: var(--ds-white);
+  --n1-surface-muted: var(--ds-grey-100);
+  --n1-border: var(--ds-grey-200);
+  --n1-border-strong: var(--ds-grey-300);
+  --n1-text-muted: var(--ds-grey-600);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* For readability concerns, choose a lighter/darker palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #8b9bd6;
-  --ifm-color-primary-dark: #788bcf;
-  --ifm-color-primary-darker: #657bc9;
-  --ifm-color-primary-darkest: #425bb9;
-  --ifm-color-primary-light: #9eabdd;
-  --ifm-color-primary-lighter: #b1bbe3;
-  --ifm-color-primary-lightest: #d6dcf1;
-  --ifm-heading-color: #f0f0ee;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: color-mix(in srgb, var(--ds-primary) 65%, white);
+  --ifm-color-primary-dark: color-mix(in srgb, var(--ds-primary) 78%, white);
+  --ifm-color-primary-darker: color-mix(in srgb, var(--ds-primary) 85%, white);
+  --ifm-color-primary-darkest: var(--ds-primary);
+  --ifm-color-primary-light: color-mix(in srgb, var(--ds-primary) 50%, white);
+  --ifm-color-primary-lighter: color-mix(in srgb, var(--ds-primary) 38%, white);
+  --ifm-color-primary-lightest: color-mix(in srgb, var(--ds-primary) 20%, white);
+
+  --ifm-background-color: var(--ds-grey-900);
+  --ifm-background-surface-color: var(--ds-grey-800);
+  --ifm-color-emphasis-100: #1c2630;
+  --ifm-color-emphasis-200: var(--ds-grey-800);
+  --ifm-color-emphasis-300: var(--ds-grey-700);
+  --ifm-color-emphasis-400: var(--ds-grey-600);
+  --ifm-color-emphasis-600: var(--ds-grey-400);
+  --ifm-color-emphasis-700: var(--ds-grey-300);
+  --ifm-color-emphasis-800: var(--ds-grey-200);
+
+  --ifm-heading-color: var(--ds-grey-100);
+  --ifm-font-color-base: var(--ds-grey-300);
+  --ifm-code-background: var(--ds-grey-800);
+  --ifm-table-border-color: var(--ds-grey-700);
+
+  --ifm-navbar-background-color: var(--ds-grey-900);
+  --ifm-toc-border-color: var(--ds-grey-700);
+  --ifm-toc-link-color: var(--ds-grey-400);
+
+  /* Pale, white-mixed admonition backgrounds would lose contrast on a dark
+     surface, so mix status colours into the dark surface colour instead. */
+  --ifm-color-success-contrast-background: color-mix(in srgb, var(--ds-success-main) 18%, var(--ds-grey-800));
+  --ifm-color-success-contrast-foreground: var(--ds-success-light);
+  --ifm-color-warning-contrast-background: color-mix(in srgb, var(--ds-warning-main) 20%, var(--ds-grey-800));
+  --ifm-color-warning-contrast-foreground: var(--ds-warning-light);
+  --ifm-color-danger-contrast-background: color-mix(in srgb, var(--ds-error-main) 18%, var(--ds-grey-800));
+  --ifm-color-danger-contrast-foreground: var(--ds-error-light);
+  --ifm-color-info-contrast-background: color-mix(in srgb, var(--ds-info-main) 18%, var(--ds-grey-800));
+  --ifm-color-info-contrast-foreground: var(--ds-info-light);
+
+  --docusaurus-highlighted-code-line-bg: color-mix(in srgb, var(--ds-primary) 25%, transparent);
+
+  --n1-surface: var(--ds-grey-800);
+  --n1-surface-muted: #1c2630;
+  --n1-border: var(--ds-grey-700);
+  --n1-border-strong: var(--ds-grey-600);
+  --n1-text-muted: var(--ds-grey-400);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Base behaviour: focus, motion and selection                             */
+/* ----------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.2 "Focus Visible"); mouse/touch
+   interactions don't get a ring, keyboard navigation always does. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 2px;
+  border-radius: var(--ds-radius-xs);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ds-primary) 25%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------------------------------- */
+/* Typography & content width                                              */
+/* ----------------------------------------------------------------------- */
+
+/* Long headings, labels and translated strings must wrap instead of
+   overflowing their container. */
+h1, h2, h3, h4, h5, h6, .navbar__title, .navbar__link, .menu__link {
+  overflow-wrap: break-word;
+}
+
+/* Doc article headings use a scale adapted from the token type ramp
+   (desktop h1-h4 are sized for marketing use; long-form prose reads better
+   a size down, while still inheriting the token weight/family). */
+.markdown h1 { font-size: 2.25rem; line-height: 2.75rem; }
+.markdown h2 { font-size: var(--ds-type-h4-size); line-height: var(--ds-type-h4-line); margin-top: var(--ds-space-2xl); }
+.markdown h3 { font-size: var(--ds-type-h5-size); line-height: var(--ds-type-h5-line); margin-top: var(--ds-space-xl); }
+.markdown h4 { font-size: var(--ds-type-subtitle1-size); line-height: var(--ds-type-subtitle1-line); font-weight: var(--ds-font-weight-medium); }
+.markdown > p, .markdown li { font-size: var(--ds-type-body1-size); line-height: var(--ds-type-body1-line); }
+
+/* Cap prose width for readability; code blocks/tables inside keep their own
+   horizontal scrolling so they're never forced to shrink below usability. */
+.theme-doc-markdown.markdown {
+  max-width: 52rem;
+}
+
+.markdown a {
+  font-weight: var(--ds-font-weight-medium);
+  text-underline-offset: 3px;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Navbar, dropdowns & mobile menu (framework-rendered; global CSS only)   */
+/* ----------------------------------------------------------------------- */
+
+.navbar {
+  border-bottom: 1px solid var(--n1-border);
+}
+
+.navbar__brand { min-width: 0; }
+.navbar__title { overflow: hidden; text-overflow: ellipsis; }
+
+.navbar__link,
+.navbar__item {
+  border-radius: var(--ds-radius-sm);
+  font-weight: var(--ds-font-weight-medium);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.navbar__link:hover {
+  background: var(--n1-surface-muted);
+}
+
+.navbar__link--active {
+  color: var(--ifm-color-primary);
+}
+
+.navbar__search-input {
+  border-radius: var(--ds-radius-pill);
+  transition: box-shadow 150ms ease;
+}
+.navbar__search-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ds-primary);
+}
+
+.dropdown__menu {
+  border-radius: var(--ds-radius-md);
+  box-shadow: var(--ds-shadow-8);
+  border: 1px solid var(--n1-border);
+  padding: var(--ds-space-xs);
+}
+.dropdown__link {
+  border-radius: var(--ds-radius-sm);
+}
+
+/* Mobile hamburger menu on pages without the custom doc sidebar (e.g. the
+   homepage) — give it the same clean, token-driven surface as the rest of
+   the light/dark site rather than Infima's bare default. */
+.navbar-sidebar:not(:has(.theme-doc-sidebar-menu)) {
+  background: var(--n1-surface);
+}
+.navbar-sidebar:not(:has(.theme-doc-sidebar-menu)) .menu__link {
+  border-radius: var(--ds-radius-sm);
+  min-height: 44px;
+}
+
+/* Keep interactive touch targets at a practical minimum size on small
+   screens (WCAG 2.2 "Target Size (Minimum)"). */
+@media (max-width: 996px) {
+  .navbar__toggle, .navbar-sidebar__close, .clean-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ----------------------------------------------------------------------- */
+/* Buttons                                                                  */
+/* ----------------------------------------------------------------------- */
+
+.button {
+  font-weight: var(--ds-font-weight-medium);
+  letter-spacing: 0.01em;
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+.button:hover {
+  transform: translateY(-1px);
+}
+.button--secondary {
+  --ifm-button-background-color: transparent;
+  border-width: 2px;
+}
+/* Infima hardcodes .button.button--secondary text to a fixed dark grey
+   (two-class specificity); match that specificity so the override actually
+   wins and the outline button stays legible on a dark background. */
+html[data-theme='dark'] .button.button--secondary {
+  color: var(--ds-grey-100);
+  border-color: var(--ds-grey-100);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Admonitions                                                              */
+/* ----------------------------------------------------------------------- */
+
+.theme-admonition {
+  border-radius: var(--ds-radius-md);
+  box-shadow: none;
+  border: 1px solid var(--ifm-alert-border-color);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Code blocks & inline code                                                */
+/* ----------------------------------------------------------------------- */
+
+.theme-code-block {
+  border: 1px solid var(--n1-border);
+  box-shadow: none;
+}
+
+code {
+  font-weight: var(--ds-font-weight-medium);
+}
+pre code {
+  font-weight: var(--ds-font-weight-regular);
+}
+
+.theme-code-block-highlighted-line {
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Tables                                                                   */
+/* ----------------------------------------------------------------------- */
+
+.table-of-contents,
+table {
+  font-size: var(--ds-type-body2-size);
+}
+
+/* Infima already renders tables as `display: block; overflow: auto;` so wide
+   tables scroll horizontally instead of overflowing their container; only
+   add the visual treatment here. */
+.markdown table {
+  width: 100%;
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-md);
+}
+.markdown thead tr {
+  background: var(--n1-surface-muted);
+}
+.markdown th {
+  font-weight: var(--ds-font-weight-bold);
+  white-space: nowrap;
+}
+.markdown tbody tr:hover {
+  background: color-mix(in srgb, var(--ds-primary) 5%, transparent);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Blockquotes                                                              */
+/* ----------------------------------------------------------------------- */
+
+.markdown blockquote {
+  border-left-width: 3px;
+  border-left-color: var(--ds-accent);
+  background: var(--n1-surface-muted);
+  border-radius: 0 var(--ds-radius-sm) var(--ds-radius-sm) 0;
+  padding: var(--ds-space-sm) var(--ds-space-lg);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Tabs                                                                     */
+/* ----------------------------------------------------------------------- */
+
+.tabs {
+  border-bottom: 2px solid var(--n1-border);
+  gap: var(--ds-space-md);
+}
+.tabs__item {
+  border-radius: 0;
+  padding: var(--ds-space-xs) var(--ds-space-xs);
+  font-weight: var(--ds-font-weight-medium);
+}
+.tabs__item--active {
+  border-bottom-color: var(--ifm-color-primary);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Pagination (prev/next) & breadcrumbs                                     */
+/* ----------------------------------------------------------------------- */
+
+.pagination-nav__link {
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-md);
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--ds-shadow-4);
+  transform: translateY(-2px);
+}
+.pagination-nav__sublabel {
+  color: var(--n1-text-muted);
+}
+
+.breadcrumbs {
+  flex-wrap: wrap;
+}
+.breadcrumbs__item {
+  min-width: 0;
+}
+.breadcrumbs__link {
+  max-width: 24ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.breadcrumbs__item--active .breadcrumbs__link {
+  background: color-mix(in srgb, var(--ds-primary) 12%, transparent);
+  color: var(--ifm-color-primary);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Table of contents                                                       */
+/* ----------------------------------------------------------------------- */
+
+.table-of-contents__link {
+  border-left: 2px solid transparent;
+  padding-left: var(--ds-space-sm);
+  transition: border-color 150ms ease, color 150ms ease;
+}
+.table-of-contents__link--active {
+  border-left-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  font-weight: var(--ds-font-weight-medium);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Tags & badges                                                           */
+/* ----------------------------------------------------------------------- */
+
+.badge {
+  border-radius: var(--ds-radius-pill);
+  font-weight: var(--ds-font-weight-medium);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Shared cards (homepage sections, swizzled components)                   */
+/* ----------------------------------------------------------------------- */
+
+.n1-card {
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--n1-surface);
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+.n1-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ds-shadow-card);
+  border-color: color-mix(in srgb, var(--ds-primary) 30%, var(--n1-border));
+}
+
+/* Keep the reference's dark navigation in both document colour modes. */
+.n1-doc-sidebar,
+.navbar-sidebar:has(.theme-doc-sidebar-menu) {
+  --n1-sidebar-hover: color-mix(in srgb, var(--n1-sidebar-text) 8%, var(--n1-sidebar-background));
+  --ifm-menu-color: var(--n1-sidebar-text);
+  --ifm-menu-color-active: var(--n1-sidebar-text);
+  --ifm-menu-color-background-hover: var(--n1-sidebar-hover);
+  --ifm-menu-color-background-active: color-mix(in srgb, var(--n1-sidebar-text) 20%, var(--n1-sidebar-background));
+  --ifm-menu-link-padding-horizontal: var(--n1-sidebar-space-md);
+  --ifm-menu-link-padding-vertical: var(--n1-sidebar-space-md);
+  --ifm-menu-link-sublist-icon-filter: brightness(0) saturate(100%) invert(70%);
+  background: var(--n1-sidebar-background);
+  color: var(--n1-sidebar-text);
+  font-family: var(--n1-sidebar-font-family);
+}
+
+.theme-doc-sidebar-menu {
+  font-size: var(--n1-sidebar-font-size);
+  font-weight: var(--n1-sidebar-font-weight);
+  line-height: var(--n1-sidebar-line-height);
+}
+
+.theme-doc-sidebar-menu .menu__link,
+.theme-doc-sidebar-menu .menu__list-item-collapsible {
+  border-radius: var(--n1-sidebar-radius);
+}
+
+.theme-doc-sidebar-menu .menu__link {
+  min-height: 36px;
+  color: var(--n1-sidebar-text);
+}
+.theme-doc-sidebar-menu > .menu__list-item { margin: 0 0 var(--n1-sidebar-space-xs); }
+.theme-doc-sidebar-menu > .menu__list-item > .menu__list-item-collapsible > .menu__link {
+  min-height: var(--n1-sidebar-space-row);
+}
+.theme-doc-sidebar-menu .menu__link--active { color: var(--n1-sidebar-text); font-weight: var(--n1-sidebar-active-weight); }
+.theme-doc-sidebar-menu .menu__list-item-collapsible:has(> .menu__link--active) {
+  background: var(--ifm-menu-color-background-active);
+}
+.theme-doc-sidebar-menu .menu__list-item-collapsible:has(> .menu__link--active):hover {
+  background: var(--ifm-menu-color-background-active);
+}
+.theme-doc-sidebar-menu .menu__link--sublist::after,
+.theme-doc-sidebar-menu .menu__caret::before {
+  width: 14px;
+  height: 14px;
+  background-size: 14px 14px;
+}
+.theme-doc-sidebar-menu .menu__list .menu__link {
+  color: var(--n1-sidebar-icon);
+  padding: var(--n1-sidebar-space-sm) var(--n1-sidebar-space-md);
+  font-size: var(--n1-sidebar-font-size);
+}
+.theme-doc-sidebar-menu .menu__list .menu__link--active {
+  color: var(--n1-sidebar-text);
+  background: var(--n1-sidebar-hover);
+}
+.theme-doc-sidebar-menu > .menu__list-item > .menu__list {
+  margin: var(--n1-sidebar-space-xs) 0 var(--n1-sidebar-space-md) 23px;
+  padding-left: var(--n1-sidebar-space-lg);
+  border-left: 1px solid color-mix(in srgb, var(--n1-sidebar-icon) 18%, transparent);
+}
+.theme-doc-sidebar-menu .menu__link:focus-visible,
+.theme-doc-sidebar-menu .menu__caret:focus-visible { outline: 2px solid var(--n1-sidebar-accent); outline-offset: -2px; }
+
+/* Each main section has a distinct, optically aligned silhouette. */
+.theme-doc-sidebar-menu > .menu__list-item > .menu__list-item-collapsible > .menu__link::before {
+  content: '';
+  flex: 0 0 var(--n1-sidebar-space-xl);
+  width: var(--n1-sidebar-space-xl);
+  height: var(--n1-sidebar-space-xl);
+  margin-right: var(--n1-sidebar-space-lg);
+  background: var(--n1-sidebar-section-icon) center / contain no-repeat;
+}
+
+.sidebar-overview { --n1-sidebar-section-icon: url('../../static/img/sidebar/overview.svg'); }
+.sidebar-foundations { --n1-sidebar-section-icon: url('../../static/img/sidebar/foundations.svg'); }
+.sidebar-components { --n1-sidebar-section-icon: url('../../static/img/sidebar/components.svg'); }
+.sidebar-tokens { --n1-sidebar-section-icon: url('../../static/img/sidebar/tokens.svg'); }
+
+.navbar-sidebar:has(.theme-doc-sidebar-menu) .navbar-sidebar__brand {
+  justify-content: center;
+  padding: var(--n1-sidebar-space-lg) 0;
+}
+
+.navbar-sidebar:has(.theme-doc-sidebar-menu) .navbar-sidebar__brand .navbar__logo {
+  width: 140px;
+  height: auto;
+}
+
+.navbar-sidebar:has(.theme-doc-sidebar-menu) .navbar-sidebar__back {
+  color: var(--n1-sidebar-text);
+  background: var(--n1-sidebar-hover);
+}
+
+@media (min-width: 997px) {
+  :root { --doc-sidebar-width: 300px; }
+  .theme-doc-sidebar-container { background: var(--n1-sidebar-background); border-right: 0 !important; }
 }
