@@ -1,0 +1,346 @@
+/**
+ * Visual language for the Personas page: the same grain/grid atmosphere
+ * and gradient-text banner used on Design Principles, paired with a
+ * discrete two-column card grid (rather than a divided list) because
+ * each persona is a self-contained profile, not a line in a sequence.
+ * Reduced-motion users get the final, settled state immediately via the
+ * global rule in custom.css.
+ */
+
+/* ----------------------------------------------------------------------- */
+/* Intro banner                                                            */
+/* ----------------------------------------------------------------------- */
+
+.intro {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 var(--ds-space-3xl);
+  padding: var(--ds-space-2xl) var(--ds-space-xl);
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-lg);
+  background: linear-gradient(180deg, var(--n1-surface) 0%, var(--n1-surface-muted) 100%);
+}
+
+.intro::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ds-accent), var(--ds-primary), var(--ds-accent-purple));
+}
+
+.introAtmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.introGrain {
+  position: absolute;
+  inset: -20%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+[data-theme='dark'] .introGrain {
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+}
+
+.introGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--n1-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--n1-border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse 70% 60% at 20% 0%, black, transparent 75%);
+}
+
+@keyframes pz-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.introTop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--ds-space-lg);
+}
+
+.introHeading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-sm);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-xs);
+  color: var(--ifm-color-primary);
+  font-size: var(--ds-type-overline-size);
+  font-weight: var(--ds-font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  animation: pz-reveal-up 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ds-accent), var(--ds-accent-purple));
+}
+
+.introTitle {
+  margin: 0;
+  font-size: clamp(2.25rem, 1.8rem + 2.2vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  animation: pz-reveal-up 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 80ms;
+}
+
+.introTitlePlain {
+  color: var(--ifm-font-color-base);
+}
+
+.introTitleAccent {
+  background: linear-gradient(100deg, var(--ds-primary), var(--ds-accent) 55%, var(--ds-accent-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.introLead {
+  position: relative;
+  z-index: 1;
+  margin: var(--ds-space-lg) 0 0;
+  max-width: 38rem;
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-subtitle1-size);
+  line-height: var(--ds-type-subtitle1-line);
+  animation: pz-reveal-up 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 180ms;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Corner badge                                                            */
+/* ----------------------------------------------------------------------- */
+
+.badge {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-sm);
+  flex-shrink: 0;
+  padding: var(--ds-space-sm) var(--ds-space-md);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-grey-900);
+  animation: pz-reveal-up 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 40ms;
+}
+
+.badgeMark {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.badgeDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  background: var(--ds-accent);
+}
+
+.badgeDot:nth-child(3n + 2) {
+  background: var(--ds-primary);
+}
+
+.badgeDot:nth-child(3n) {
+  background: var(--ds-accent-purple);
+}
+
+.badgeText {
+  color: var(--ds-white);
+  font-size: var(--ds-type-caption-size);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Persona grid + cards                                                    */
+/* ----------------------------------------------------------------------- */
+
+.sectionLead {
+  margin-top: calc(var(--ds-space-sm) * -1);
+  color: var(--n1-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--ds-space-lg);
+  margin: var(--ds-space-lg) 0 var(--ds-space-2xl);
+}
+
+.attribution {
+  margin-top: var(--ds-space-2xl);
+  padding-top: var(--ds-space-lg);
+  border-top: 1px solid var(--n1-border);
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-caption-size);
+}
+
+.attribution a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  gap: var(--ds-space-md);
+  overflow: hidden;
+  padding: var(--ds-space-lg);
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--n1-surface-muted);
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--ds-accent), var(--ds-accent-purple));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 280ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--ds-primary) 30%, var(--n1-border));
+  box-shadow: var(--ds-shadow-card);
+}
+
+.card:hover::before {
+  transform: scaleY(1);
+}
+
+.card[data-reveal='armed'] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.card[data-reveal='visible'] {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.avatar {
+  flex-shrink: 0;
+  overflow: hidden;
+  width: 56px;
+  height: 56px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: var(--n1-surface);
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card:hover .avatar {
+  transform: scale(1.08);
+}
+
+.accentCyan {
+  border-color: var(--ds-primary);
+}
+
+.accentPurple {
+  border-color: var(--ds-accent-purple);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cardRole {
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-caption-size);
+  font-weight: var(--ds-font-weight-medium);
+}
+
+.cardName {
+  margin: var(--ds-space-3xs) 0 var(--ds-space-sm);
+  font-size: var(--ds-type-h5-size);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+/* Mix percentages are tuned to clear 4.5:1 contrast against the warning
+   text color in both themes (verified numerically). */
+.cardBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-bottom: var(--ds-space-sm);
+  padding: var(--ds-space-3xs) var(--ds-space-sm);
+  border-radius: var(--ds-radius-pill);
+  background: color-mix(in srgb, var(--ds-warning-light) 30%, var(--ds-white));
+  color: var(--ds-warning-dark);
+  font-size: var(--ds-type-caption-size);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+[data-theme='dark'] .cardBadge {
+  background: color-mix(in srgb, var(--ds-warning-main) 30%, var(--ds-grey-800));
+  color: var(--ds-warning-light);
+}
+
+.cardFocus {
+  margin: 0;
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-body2-size);
+  line-height: var(--ds-type-body2-line);
+}

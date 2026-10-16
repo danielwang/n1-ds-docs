@@ -1,0 +1,36 @@
+---
+id: personas
+title: User Personas
+description: The six roles nebulaONE's UX and UI guidelines are designed around — for humans and AI.
+sidebar_position: 2
+hide_title: true
+---
+
+import PersonasIntro from '@site/src/components/Personas/Intro';
+import PersonaGrid from '@site/src/components/Personas/PersonaGrid';
+import {personas} from '@site/src/components/Personas/data';
+import styles from '@site/src/components/Personas/styles.module.css';
+
+<PersonasIntro />
+
+## The Six Personas
+
+<div className={styles.sectionLead}>
+  Every principle in this documentation exists to serve one of the people
+  below.
+</div>
+
+<PersonaGrid personas={personas} />
+
+<div className={styles.sectionLead}>
+  Creators and moderators (Peter, Adam, Molly, Dora) shape what agents
+  exist and whether they stay within policy. Decision makers and everyday
+  users (Cyrus, Sarah) judge the platform by what those agents do for
+  them. Designing for one group without the other is designing half the
+  product — see [Design Principles](/docs/foundations/design-principles)
+  for how we hold both in balance.
+</div>
+
+<div className={styles.attribution}>
+  Persona avatars remixed from ["Personas" by Draftbit](https://www.dicebear.com/styles/personas/), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+</div>
