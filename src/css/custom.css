@@ -243,6 +243,7 @@ h1, h2, h3, h4, h5, h6, .navbar__title, .navbar__link, .menu__link {
 }
 
 .navbar__brand { min-width: 0; }
+.navbar__logo { background-color: #fff; border-radius: 2px; }
 .navbar__title { overflow: hidden; text-overflow: ellipsis; }
 
 .navbar__link,
@@ -582,6 +583,10 @@ table {
 }
 
 @media (min-width: 997px) {
-  :root { --doc-sidebar-width: 300px; }
+  :root {
+    --doc-sidebar-width: 300px;
+    --ifm-navbar-height: 0px;
+  }
+  .navbar { display: none; }
   .theme-doc-sidebar-container { background: var(--n1-sidebar-background); border-right: 0 !important; }
 }

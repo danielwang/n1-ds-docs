@@ -1,0 +1,329 @@
+/**
+ * Visual language for the Design Principles page: it borrows the
+ * homepage's grain/grid atmosphere and gradient-text treatment for the
+ * opening banner, then settles into a calmer, token-driven "divided
+ * grid" for the principle lists themselves so long-form reading content
+ * stays easy to scan. Reduced-motion users get the final, settled state
+ * immediately via the global rule in custom.css.
+ */
+
+/* ----------------------------------------------------------------------- */
+/* Intro banner                                                            */
+/* ----------------------------------------------------------------------- */
+
+.intro {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 var(--ds-space-3xl);
+  padding: var(--ds-space-2xl) var(--ds-space-xl);
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-lg);
+  background: linear-gradient(180deg, var(--n1-surface) 0%, var(--n1-surface-muted) 100%);
+}
+
+.intro::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ds-accent), var(--ds-primary), var(--ds-accent-purple));
+}
+
+.introAtmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.introGrain {
+  position: absolute;
+  inset: -20%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+[data-theme='dark'] .introGrain {
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+}
+
+.introGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--n1-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--n1-border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse 70% 60% at 20% 0%, black, transparent 75%);
+}
+
+.introHeader {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--ds-space-lg);
+}
+
+@media (min-width: 768px) {
+  .introHeader {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: end;
+    gap: var(--ds-space-2xl);
+  }
+}
+
+@keyframes dp-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.introTitle {
+  margin: 0;
+  font-size: clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.introTitleLine {
+  display: block;
+  animation: dp-reveal-up 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.introTitleLine:nth-child(1) {
+  animation-delay: 40ms;
+}
+
+.introTitleLine:nth-child(2) {
+  animation-delay: 130ms;
+}
+
+.introTitleAccent {
+  background: linear-gradient(100deg, var(--ds-primary), var(--ds-accent) 55%, var(--ds-accent-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.introLead {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 34rem;
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-subtitle1-size);
+  line-height: var(--ds-type-subtitle1-line);
+  animation: dp-reveal-up 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 220ms;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Philosophy block                                                        */
+/* ----------------------------------------------------------------------- */
+
+.philosophy {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--ds-space-2xl);
+  padding-top: var(--ds-space-2xl);
+  border-top: 1px solid var(--n1-border);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-xs);
+  margin-bottom: var(--ds-space-sm);
+  color: var(--ifm-color-primary);
+  font-size: var(--ds-type-overline-size);
+  font-weight: var(--ds-font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ds-accent), var(--ds-accent-purple));
+}
+
+.philosophyStatement {
+  margin: 0 0 var(--ds-space-sm);
+  max-width: 36rem;
+  font-size: var(--ds-type-h3-size);
+  line-height: 1.2;
+  font-weight: var(--ds-font-weight-bold);
+}
+
+.philosophyBody {
+  margin: 0 0 var(--ds-space-xl);
+  max-width: 42rem;
+  color: var(--n1-text-muted);
+  line-height: var(--ds-type-body1-line);
+}
+
+.pillarGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--n1-border);
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-md);
+  overflow: hidden;
+}
+
+.pillarCell {
+  background: var(--n1-surface);
+  padding: var(--ds-space-md) var(--ds-space-lg);
+}
+
+.pillarTitle {
+  margin: 0 0 var(--ds-space-3xs);
+  font-size: var(--ds-type-subtitle1-size);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+.pillarBody {
+  margin: 0;
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-body2-size);
+  line-height: var(--ds-type-body2-line);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Section lead + attribution                                              */
+/* ----------------------------------------------------------------------- */
+
+.sectionLead {
+  margin-top: calc(var(--ds-space-sm) * -1);
+  color: var(--n1-text-muted);
+}
+
+.attribution {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--ds-space-sm) var(--ds-space-lg);
+  margin-top: var(--ds-space-2xl);
+  padding-top: var(--ds-space-lg);
+  border-top: 1px solid var(--n1-border);
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-caption-size);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Principle grid                                                          */
+/* ----------------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  margin: var(--ds-space-lg) 0 var(--ds-space-2xl);
+  background: var(--n1-border);
+  border: 1px solid var(--n1-border);
+  border-radius: var(--ds-radius-lg);
+  overflow: hidden;
+}
+
+.cell {
+  position: relative;
+  overflow: hidden;
+  background: var(--n1-surface);
+  padding: var(--ds-space-lg);
+  transition: background 220ms ease;
+}
+
+.cell::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ds-accent), var(--ds-accent-purple));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 280ms ease;
+}
+
+.cell:hover {
+  background: var(--n1-surface-muted);
+}
+
+.cell:hover::before,
+.cell:focus-within::before {
+  transform: scaleX(1);
+}
+
+.cell[data-reveal='armed'] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.cell[data-reveal='visible'] {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    background 220ms ease;
+}
+
+.cellNumber {
+  display: block;
+  margin-bottom: var(--ds-space-sm);
+  font-size: var(--ds-type-h3-size);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Raw --ds-accent (cyan) and --ds-accent-purple don't meet contrast
+   requirements on every surface in every theme, so each accent swaps to
+   a theme-appropriate stand-in: readable indigo/purple on light
+   backgrounds, and the brighter brand hues once the background goes
+   dark. */
+.accentPurple {
+  color: var(--ds-accent-purple);
+}
+
+.accentCyan {
+  color: var(--ds-primary);
+}
+
+[data-theme='dark'] .accentPurple {
+  color: color-mix(in srgb, var(--ds-accent-purple) 55%, white);
+}
+
+[data-theme='dark'] .accentCyan {
+  color: var(--ds-accent);
+}
+
+.cellTitle {
+  margin: 0 0 var(--ds-space-2xs);
+  font-size: var(--ds-type-h5-size);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+.cellKicker {
+  margin: 0 0 var(--ds-space-sm);
+  font-weight: var(--ds-font-weight-medium);
+}
+
+.cellBody {
+  margin: 0;
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-body2-size);
+  line-height: var(--ds-type-body2-line);
+}

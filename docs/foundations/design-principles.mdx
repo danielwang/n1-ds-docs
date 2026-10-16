@@ -1,0 +1,35 @@
+---
+id: design-principles
+title: Design Principles
+description: Human-centered design principles for Cloudforce and nebulaONE — guidance for humans and AI.
+sidebar_position: 1
+hide_title: true
+---
+
+import DesignPrinciplesIntro from '@site/src/components/DesignPrinciples/Intro';
+import PrincipleGrid from '@site/src/components/DesignPrinciples/PrincipleGrid';
+import {universalPrinciples, productPrinciples} from '@site/src/components/DesignPrinciples/data';
+import styles from '@site/src/components/DesignPrinciples/styles.module.css';
+
+<DesignPrinciplesIntro />
+
+## Universal Principles
+
+<div className={styles.sectionLead}>
+  Applies to every discipline — these govern how Cloudforce thinks and decides.
+</div>
+
+<PrincipleGrid principles={universalPrinciples} accent="purple" />
+
+## Product Design Principles
+
+<div className={styles.sectionLead}>
+  How nebulaONE behaves, from a person's first minute to their deepest expertise.
+</div>
+
+<PrincipleGrid principles={productPrinciples} accent="cyan" />
+
+<div className={styles.attribution}>
+  <span>Cloudforce · nebulaONE — Design Principles</span>
+  <span>v1 · Sep 2026 · Husein Sharaf, CEO · Daniel Wang, UX Designer</span>
+</div>

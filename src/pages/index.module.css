@@ -1,48 +1,162 @@
 /**
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
+ *
+ * Cinematic hero: a layered "atmosphere" (grain + fine grid + drifting
+ * glow orbs) sits behind an asymmetrical editorial composition — a
+ * left-aligned text column and a right-hand frosted-glass visual column.
+ * Reduced-motion users get the same final layout instantly: the global
+ * `prefers-reduced-motion` rule in custom.css collapses every animation's
+ * duration to near-zero, so nothing below needs its own escape hatch.
  */
 
-.heroBanner {
+.hero {
   position: relative;
-  padding: var(--ds-space-4xl) 0;
   overflow: hidden;
-  background: var(--ifm-background-color);
+  display: flex;
+  align-items: center;
+  min-height: min(44rem, 92vh);
+  padding: var(--ds-space-4xl) 0;
+  background: linear-gradient(180deg, var(--ifm-background-color) 0%, var(--n1-surface-muted) 140%);
 }
 
-/* A faint dot grid nods to the token set's own 12-column grid without
-   reproducing any specific marketing-site graphic. Kept on a decorative
-   pseudo-element (rather than the banner's own background) so the mask
-   that fades it out never affects the real heading/button content. */
-.heroBanner::before {
-  content: '';
+/* ----------------------------------------------------------------------- */
+/* Atmosphere: grain, technical grid, drifting glow orbs                   */
+/* ----------------------------------------------------------------------- */
+
+.atmosphere {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, var(--n1-border) 1px, transparent 1px);
-  background-size: 24px 24px;
-  mask-image: linear-gradient(to bottom, black, transparent);
+  z-index: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .heroBanner::after {
-    content: '';
-    position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 420px;
-    background: radial-gradient(
-      ellipse at center,
-      color-mix(in srgb, var(--ds-primary) 14%, transparent),
-      transparent 70%
-    );
-    pointer-events: none;
+/* Fine film grain, generated inline with an SVG turbulence filter baked
+   into a data URI rather than a binary asset, so it's themeable and
+   adds zero network weight. */
+.grain {
+  position: absolute;
+  inset: -20%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  animation: grain-drift 9s steps(4) infinite;
+}
+
+[data-theme='dark'] .grain {
+  opacity: 0.07;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes grain-drift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1.5%, 1%); }
+  50% { transform: translate(1%, -1.5%); }
+  75% { transform: translate(-1%, -1%); }
+}
+
+/* A faint technical grid nods to the token set's own spacing/columns
+   without reproducing any specific marketing-site graphic. */
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--n1-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--n1-border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.45;
+  mask-image: radial-gradient(ellipse 80% 60% at 30% 20%, black, transparent 75%);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  will-change: transform;
+  animation: orb-float 16s ease-in-out infinite alternate;
+}
+
+.orbPrimary {
+  top: -12%;
+  left: -8%;
+  width: 26rem;
+  height: 26rem;
+  background: color-mix(in srgb, var(--ds-primary) 38%, transparent);
+  animation-duration: 18s;
+}
+
+.orbAccent {
+  top: 8%;
+  right: -10%;
+  width: 22rem;
+  height: 22rem;
+  background: color-mix(in srgb, var(--ds-accent) 32%, transparent);
+  animation-duration: 14s;
+  animation-delay: -4s;
+}
+
+.orbPurple {
+  bottom: -18%;
+  left: 28%;
+  width: 20rem;
+  height: 20rem;
+  background: color-mix(in srgb, var(--ds-accent-purple) 30%, transparent);
+  animation-duration: 20s;
+  animation-delay: -9s;
+}
+
+@keyframes orb-float {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(4%, 6%) scale(1.08); }
+}
+
+/* ----------------------------------------------------------------------- */
+/* Layout: asymmetrical text + visual columns                              */
+/* ----------------------------------------------------------------------- */
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: var(--ds-space-3xl);
+}
+
+@media (min-width: 997px) {
+  .heroInner {
+    grid-template-columns: 1.15fr 0.85fr;
   }
 }
 
 .heroContent {
-  position: relative;
-  max-width: 44rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 36rem;
+  text-align: left;
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  display: inline-flex;
+  margin-bottom: var(--ds-space-xl);
+  padding: var(--ds-space-xs) var(--ds-space-md);
+  border-radius: var(--ds-radius-md);
+  background: #fff;
+  animation: reveal-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.logo img {
+  display: block;
+  height: 28px;
+  width: auto;
 }
 
 .eyebrow {
@@ -57,33 +171,215 @@
   font-weight: var(--ds-font-weight-bold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  animation: reveal-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 90ms;
 }
 
 .heroTitle {
   margin-bottom: var(--ds-space-md);
-  font-size: clamp(2.5rem, 2rem + 2vw, var(--ds-type-h1-size));
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 2.1rem + 3vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.titleLine {
+  display: block;
+  animation: reveal-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.titleLine:nth-child(1) { animation-delay: 180ms; }
+.titleLine:nth-child(2) { animation-delay: 260ms; }
+
+.titleAccent {
+  font-style: normal;
+  background: linear-gradient(100deg, var(--ds-primary), var(--ds-accent) 55%, var(--ds-accent-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .heroSubtitle {
-  margin: 0 auto var(--ds-space-xl);
-  max-width: 34rem;
+  margin: 0 0 var(--ds-space-xl);
+  max-width: 30rem;
   color: var(--n1-text-muted);
   font-size: var(--ds-type-subtitle1-size);
   line-height: var(--ds-type-subtitle1-line);
+  animation: reveal-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 380ms;
+}
+
+.buttons {
+  animation: reveal-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 460ms;
+}
+
+.cta {
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--ds-shadow-8);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--ds-primary) 35%, transparent);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Visual column: frosted glass pane over a cropped wordmark watermark     */
+/* ----------------------------------------------------------------------- */
+
+.heroVisual {
+  display: none;
+  position: relative;
+  min-height: 26rem;
+}
+
+@media (min-width: 997px) {
+  .heroVisual {
+    display: block;
+  }
+}
+
+/* Shows only the icon mark (the logo's left-most ~30%), not the legible
+   wordmark, by overflowing a height-anchored copy of the logo out of a
+   clipped frame — an abstract brand echo rather than a stray duplicate. */
+.watermark {
+  position: absolute;
+  top: -18%;
+  right: -12%;
+  width: 26rem;
+  height: 26rem;
+  overflow: hidden;
+  opacity: 0.16;
+  mix-blend-mode: luminosity;
+  transform: rotate(-12deg);
+  animation: reveal-fade 1200ms ease both;
+  animation-delay: 120ms;
+}
+
+[data-theme='dark'] .watermark {
+  opacity: 0.22;
+  mix-blend-mode: soft-light;
+}
+
+.watermarkImg {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+}
+
+.glassPane {
+  position: absolute;
+  inset: 12% 6%;
+  overflow: hidden;
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid color-mix(in srgb, var(--n1-border-strong) 70%, transparent);
+  background: color-mix(in srgb, var(--n1-surface) 55%, transparent);
+  box-shadow: var(--ds-shadow-8);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  transform: rotate(-3deg);
+  animation: pane-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both, pane-float 7s ease-in-out infinite alternate;
+  animation-delay: 220ms, 1.1s;
+}
+
+@keyframes pane-reveal {
+  from { opacity: 0; transform: rotate(-3deg) scale(0.92) translateY(14px); }
+  to { opacity: 1; transform: rotate(-3deg) scale(1) translateY(0); }
+}
+
+@keyframes pane-float {
+  from { transform: rotate(-3deg) translateY(0); }
+  to { transform: rotate(-3deg) translateY(-10px); }
+}
+
+.glassGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--n1-border-strong) 60%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--n1-border-strong) 60%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at 30% 25%, black, transparent 70%);
+}
+
+.glassGrid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, color-mix(in srgb, var(--ds-accent) 35%, transparent) 50%, transparent 60%);
+  background-size: 260% 260%;
+  animation: sheen-sweep 6s ease-in-out infinite;
+}
+
+@keyframes sheen-sweep {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
 }
 
 @media screen and (max-width: 996px) {
-  .heroBanner {
+  .hero {
+    min-height: auto;
     padding: var(--ds-space-2xl) var(--ds-space-md);
   }
 }
 
-.buttons {
+/* ----------------------------------------------------------------------- */
+/* Footer: an oversized outlined wordmark as a quiet closing signature     */
+/* ----------------------------------------------------------------------- */
+
+.footer {
+  position: relative;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--ds-space-md);
-  flex-wrap: wrap;
+  gap: var(--ds-space-sm);
+  padding: var(--ds-space-2xl) var(--ds-space-md) var(--ds-space-xl);
+  border-top: 1px solid var(--n1-border);
+  background: var(--ifm-background-color);
+}
+
+/* Two faint column dividers nod to the hero's grid without competing
+   with the wordmark for attention. */
+.footerGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(90deg, var(--n1-border) 1px, transparent 1px);
+  background-size: calc(100% / 3) 100%;
+  mask-image: linear-gradient(to bottom, transparent, black 40%, black 70%, transparent);
+}
+
+.footerCaption {
+  position: relative;
+  margin: 0;
+  color: var(--n1-text-muted);
+  font-size: var(--ds-type-overline-size);
+  font-weight: var(--ds-font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* The outlined wordmark is a supplied asset (a translucent black stroke on
+   a transparent background) rather than recreated type, so it reproduces
+   the exact lettering. It inverts to white in dark mode since a black
+   stroke would otherwise disappear against a dark surface. */
+.footerMark {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 64rem;
+  height: auto;
+  user-select: none;
+}
+
+[data-theme='dark'] .footerMark {
+  filter: invert(1);
 }
