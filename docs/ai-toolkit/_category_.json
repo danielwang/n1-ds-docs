@@ -1,6 +1,6 @@
 {
   "label": "AI Toolkit",
-  "className": "sidebar-tokens",
-  "position": 5,
+  "className": "sidebar-ai",
+  "position": 3,
   "collapsed": true
 }

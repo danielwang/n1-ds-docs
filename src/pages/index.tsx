@@ -8,7 +8,7 @@ import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const logoSrc = useBaseUrl('/img/sidebar/logo.svg');
+  const logoSrc = useBaseUrl('/img/sidebar/logo-dark.svg');
   return (
     <header className={styles.hero}>
       {/* Decorative atmosphere: grain, drifting glow orbs and a fine

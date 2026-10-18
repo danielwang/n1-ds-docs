@@ -243,7 +243,7 @@ h1, h2, h3, h4, h5, h6, .navbar__title, .navbar__link, .menu__link {
 }
 
 .navbar__brand { min-width: 0; }
-.navbar__logo { background-color: #fff; border-radius: 2px; }
+.navbar__logo { border-radius: 2px; }
 .navbar__title { overflow: hidden; text-overflow: ellipsis; }
 
 .navbar__link,
@@ -565,7 +565,8 @@ table {
 .sidebar-overview { --n1-sidebar-section-icon: url('../../static/img/sidebar/overview.svg'); }
 .sidebar-foundations { --n1-sidebar-section-icon: url('../../static/img/sidebar/foundations.svg'); }
 .sidebar-components { --n1-sidebar-section-icon: url('../../static/img/sidebar/components.svg'); }
-.sidebar-tokens { --n1-sidebar-section-icon: url('../../static/img/sidebar/tokens.svg'); }
+.sidebar-tokens { --n1-sidebar-section-icon: url('../../static/img/sidebar/design-token.svg'); }
+.sidebar-ai { --n1-sidebar-section-icon: url('../../static/img/sidebar/ai.svg'); }
 
 .navbar-sidebar:has(.theme-doc-sidebar-menu) .navbar-sidebar__brand {
   justify-content: center;

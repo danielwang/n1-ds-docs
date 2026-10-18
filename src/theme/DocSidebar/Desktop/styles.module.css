@@ -25,9 +25,6 @@
   display: flex;
   align-items: center;
   min-width: 0;
-  padding: var(--n1-sidebar-space-md);
-  border-radius: var(--n1-sidebar-radius);
-  background: var(--n1-sidebar-text);
 }
 .brand img { width: 196px; max-width: 100%; height: auto; }
 
