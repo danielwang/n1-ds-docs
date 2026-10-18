@@ -17,7 +17,7 @@ export interface Persona {
 export const personas: Persona[] = [
   {
     id: 'sarah-student',
-    avatar: '/img/personas/sarah-student.svg',
+    avatar: '/img/personas/sarah-student.png',
     name: 'Sarah Student',
     role: 'University Student',
     badge: 'Agents user & Personal Agent creator',
@@ -26,7 +26,7 @@ export const personas: Persona[] = [
   },
   {
     id: 'peter-professor',
-    avatar: '/img/personas/peter-professor.svg',
+    avatar: '/img/personas/peter-professor.png',
     name: 'Peter Professor',
     role: 'Academic Staff',
     badge: 'Official Agent creator',
@@ -35,7 +35,7 @@ export const personas: Persona[] = [
   },
   {
     id: 'adam-admin',
-    avatar: '/img/personas/adam-admin.svg',
+    avatar: '/img/personas/adam-admin.png',
     name: 'Adam Admin',
     role: 'IT Admin @ University',
     badge: 'N1 admin & Official Agent creator',
@@ -44,7 +44,7 @@ export const personas: Persona[] = [
   },
   {
     id: 'molly-moderator',
-    avatar: '/img/personas/molly-moderator.svg',
+    avatar: '/img/personas/molly-moderator.png',
     name: 'Molly Moderator',
     role: 'IT Staff @ University',
     badge: 'Agents Moderator',
@@ -53,7 +53,7 @@ export const personas: Persona[] = [
   },
   {
     id: 'cyrus-cio',
-    avatar: '/img/personas/cyrus-cio.svg',
+    avatar: '/img/personas/cyrus-cio.png',
     name: 'Cyrus CIO',
     role: 'CIO @ University',
     badge: 'Decision maker & analytics consumer',
@@ -62,7 +62,7 @@ export const personas: Persona[] = [
   },
   {
     id: 'dora-developer',
-    avatar: '/img/personas/dora-developer.svg',
+    avatar: '/img/personas/dora-developer.png',
     name: 'Dora Developer',
     role: 'AI Developer',
     badge: 'Agent developer',

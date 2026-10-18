@@ -6,11 +6,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 const audiences = [
-  ['Designers', 'Make informed design decisions and create consistent experiences.', '/img/personas/peter-professor.svg'],
-  ['Developers', 'Build interfaces using shared components, tokens, and patterns.', '/img/personas/dora-developer.svg'],
-  ['Product managers', 'Understand design principles and align product decisions.', '/img/personas/cyrus-cio.svg'],
-  ['Content designers', 'Write clear, consistent, and helpful UI language.', '/img/personas/molly-moderator.svg'],
-  ['Marketers', 'Create on-brand experiences across campaigns and channels.', '/img/personas/sarah-student.svg'],
+  ['Designers', 'Make informed design decisions and create consistent experiences.', '/img/personas/peter-professor.png'],
+  ['Developers', 'Build interfaces using shared components, tokens, and patterns.', '/img/personas/dora-developer.png'],
+  ['Product managers', 'Understand design principles and align product decisions.', '/img/personas/cyrus-cio.png'],
+  ['Content designers', 'Write clear, consistent, and helpful UI language.', '/img/personas/molly-moderator.png'],
+  ['Marketers', 'Create on-brand experiences across campaigns and channels.', '/img/personas/sarah-student.png'],
   ['AI assistants and coding agents', 'Generate and review interfaces using N1 standards and guidelines.', '/img/personas/robot-ai.png'],
 ];
 
