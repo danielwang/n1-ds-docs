@@ -33,10 +33,10 @@ Link to other docs using relative paths, so links keep working no matter
 where the site is hosted:
 
 ```md
-See the [Getting Started](../overview/getting-started.md) guide for setup steps.
+See the [Introduction](../overview/intro.md) guide for setup steps.
 ```
 
-See the [Getting Started](../overview/getting-started.md) guide for setup steps.
+See the [Introduction](../overview/intro.md) guide for setup steps.
 
 ## Adding images
 
