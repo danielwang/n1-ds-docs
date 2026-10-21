@@ -14,7 +14,7 @@ export default function DocSidebarDesktop({path, sidebar, onCollapse, isHidden}:
     <div className={clsx(styles.sidebar, 'n1-doc-sidebar', isHidden && styles.hidden, hideOnScroll && styles.hideableNavbar)}>
       <header className={styles.header}>
         <Link to="/" className={styles.brand} aria-label="nebulaONE home">
-          <img src={useBaseUrl('/img/sidebar/logo.svg')} alt="nebulaONE" />
+          <img src={useBaseUrl('/img/logo-white.svg')} alt="nebulaONE" />
         </Link>
         {hideable && (
           <button type="button" className={styles.collapse} onClick={onCollapse} aria-label="Collapse sidebar" title="Collapse sidebar">

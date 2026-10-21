@@ -72,8 +72,8 @@ const config: Config = {
       title: '',
       logo: {
         alt: 'nebulaONE',
-        src: 'img/sidebar/logo.svg',
-        srcDark: 'img/sidebar/logo.svg',
+        src: 'img/logo-white.svg',
+        srcDark: 'img/logo-white.svg',
       },
       items: [
         {to: '/', label: 'Home', position: 'left'},

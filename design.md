@@ -1,7 +1,7 @@
 ---
 version: "1.0.0"
-name: "Portable Interface Design System"
-description: "A framework-independent design system for clear, accessible, consistent digital interfaces."
+name: "ONEdesign"
+description: "AI design system for nebulaONE."
 colors:
   primitive:
     white: "#FFFFFF"

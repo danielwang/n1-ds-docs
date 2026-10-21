@@ -8,7 +8,7 @@ import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const logoSrc = useBaseUrl('/img/sidebar/logo-dark.svg');
+  const logoSrc = useBaseUrl('/img/logo.svg');
   return (
     <header className={styles.hero}>
       {/* Decorative atmosphere: grain, drifting glow orbs and a fine
@@ -40,7 +40,7 @@ function HomepageHeader() {
             experiences.
           </p>
           <div className={styles.buttons}>
-            <Link className={`button button--primary button--lg ${styles.cta}`} to="/docs/overview/getting-started">
+            <Link className={`button button--primary button--lg ${styles.cta}`} to="/docs/overview/intro">
               Browse the Docs
             </Link>
           </div>

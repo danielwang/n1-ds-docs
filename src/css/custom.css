@@ -589,5 +589,12 @@ table {
     --ifm-navbar-height: 0px;
   }
   .navbar { display: none; }
-  .theme-doc-sidebar-container { background: var(--n1-sidebar-background); border-right: 0 !important; }
+  .theme-doc-sidebar-container,
+  .theme-doc-sidebar-container > div {
+    background: var(--n1-sidebar-background);
+    border-right: 0 !important;
+    overflow: visible !important;
+    position: relative;
+    z-index: 2;
+  }
 }

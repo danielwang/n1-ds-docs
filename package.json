@@ -6,8 +6,9 @@
     "tokens:sidebar": "node scripts/sidebar-tokens.mjs",
     "tokens:global": "node scripts/generate-tokens.mjs",
     "tokens": "npm run tokens:sidebar && npm run tokens:global",
-    "prestart": "npm run tokens",
-    "prebuild": "npm run tokens",
+    "content:markdown": "node scripts/generate-markdown-content.mjs",
+    "prestart": "npm run tokens && npm run content:markdown",
+    "prebuild": "npm run tokens && npm run content:markdown",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
@@ -17,7 +18,8 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test": "vitest run"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
@@ -27,14 +29,22 @@
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
     "@types/react": "^19.0.0",
-    "typescript": "~6.0.2"
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^26.1.0",
+    "typescript": "~6.0.2",
+    "vitest": "^3.2.7"
   },
   "browserslist": {
     "production": [

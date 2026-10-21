@@ -1,7 +1,13 @@
+---
+id: voice-and-tones
+title: Voice & Tone Writing
+description: The six roles nebulaONE's UX and UI guidelines are designed around — for humans and AI.
+sidebar_position: 8
+hide_title: true
+---
 
 
-
-# N1 Voice & Tone Writing Guidelines
+# Voice & Tone Writing
 
 ## Purpose
 

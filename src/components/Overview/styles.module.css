@@ -23,7 +23,6 @@
 .aiCompatibilityTools strong { color:var(--n1-text); }
 .audience > span { display:block; margin-bottom:var(--ds-space-3xl); color:var(--ifm-color-primary); font-weight:var(--ds-font-weight-bold); }
 .audienceAvatar { display:block; width:64px; height:64px; margin:0 0 var(--ds-space-lg); object-fit:contain; }
-.audience:last-child { grid-column:1 / 2; }
 .quote { margin-top:var(--ds-space-xl); padding:var(--ds-space-lg); border-left:3px solid var(--ds-accent); color:var(--n1-text); font-size:1.15rem; font-style:italic; }
 .useGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--ds-space-xl); }
 .useGrid article { padding:var(--ds-space-xl); border:1px solid var(--n1-border); border-radius:var(--ds-radius-lg); }
