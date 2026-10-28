@@ -20,7 +20,7 @@ edit instead of a find-and-replace across the codebase.
 
 The tokens documented in this section are extracted directly from the nebulaONE Figma design file
 ([`📖 nebulaONE.design`](https://www.figma.com/design/01imXcjljmBfqXhqFmv4kz)), exported as
-[`src/design-tokens.tokens.json`](https://github.com/danielwang/n1-ds-docs/tree/main/src/design-tokens.tokens.json)
+[`src/design-tokens.tokens.json`](https://github.com/danielwang/onedesign/tree/main/src/design-tokens.tokens.json)
 in the repository. That file is the source of truth — the pages in this section are a human-readable
 reference generated from it, grouped the same way a token consumer (engineer or designer) would look
 them up:

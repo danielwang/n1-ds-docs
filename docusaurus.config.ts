@@ -17,8 +17,8 @@ const config: Config = {
   // Set the production url of your site here
   url: 'https://danielwang.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served.
-  // For GitHub project pages deployment, this is '/<projectName>/'.
-  baseUrl: '/n1-ds-docs/',
+  // Match the published GitHub Pages path.
+  baseUrl: '/onedesign/',
 
   // GitHub pages deployment config.
   // Deployment is handled by the GitHub Actions workflow in
@@ -26,7 +26,7 @@ const config: Config = {
   // (no gh-pages branch is used), but these fields are still used for
   // "edit this page" links and the `docusaurus deploy` CLI command.
   organizationName: 'danielwang', // Usually your GitHub org/user name.
-  projectName: 'n1-ds-docs', // Usually your repo name.
+  projectName: 'onedesign', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -46,7 +46,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Edit links point to the docs folder on the default branch.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/danielwang/n1-ds-docs/tree/main/',
+          editUrl: 'https://github.com/danielwang/onedesign/tree/main/',
         },
         // The blog plugin is disabled; this is a documentation-only site.
         blog: false,
@@ -84,7 +84,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://github.com/danielwang/n1-ds-docs',
+          href: 'https://github.com/danielwang/onedesign',
           label: 'GitHub',
           position: 'right',
         },

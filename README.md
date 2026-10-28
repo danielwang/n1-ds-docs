@@ -4,7 +4,7 @@ Documentation website for the **nebulaONE** design system, built with [Docusauru
 (TypeScript). Content is written in Markdown, the sidebar is generated automatically from the `docs/`
 folder, and the site is deployed to GitHub Pages via GitHub Actions.
 
-> **Note:** This repository is configured for `https://danielwang.github.io/n1-ds-docs/`. If you fork or
+> **Note:** This repository is configured for `https://danielwang.github.io/onedesign/`. If you fork or
 > rename this repository, update `url`, `baseUrl`, `organizationName`, and `projectName` in
 > [`docusaurus.config.ts`](./docusaurus.config.ts), and the `git clone` URL below, to match.
 
@@ -18,8 +18,8 @@ folder, and the site is deployed to GitHub Pages via GitHub Actions.
 ## Local installation and development
 
 ```bash
-git clone https://github.com/danielwang/n1-ds-docs.git
-cd n1-ds-docs
+git clone https://github.com/danielwang/onedesign.git
+cd onedesign
 npm install
 npm start
 ```
@@ -94,14 +94,14 @@ To add a new page:
 ## How GitHub Pages deployment works
 
 - The site is configured for a GitHub **project page**: `url: 'https://danielwang.github.io'` and
-  `baseUrl: '/n1-ds-docs/'` in [`docusaurus.config.ts`](./docusaurus.config.ts).
+  `baseUrl: '/onedesign/'` in [`docusaurus.config.ts`](./docusaurus.config.ts).
 - [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) runs on every push to the `main` branch
   (and can be triggered manually via "Run workflow"). It installs dependencies, runs `npm run build`, and
   publishes the `build/` output using GitHub's native Pages deployment actions
   (`actions/upload-pages-artifact` + `actions/deploy-pages`) — no `gh-pages` branch or committed build
   output is required.
 - In the repository settings, under **Settings → Pages**, set **Source** to **GitHub Actions**. After the
-  first successful workflow run, the site will be available at `https://danielwang.github.io/n1-ds-docs/`.
+  first successful workflow run, the site will be available at `https://danielwang.github.io/onedesign/`.
 
 ## Project structure
 

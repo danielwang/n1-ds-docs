@@ -9,7 +9,7 @@ sidebar_position: 2
 ## Source file
 
 All tokens documented in this section come from one file:
-[`src/design-tokens.tokens.json`](https://github.com/danielwang/n1-ds-docs/tree/main/src/design-tokens.tokens.json),
+[`src/design-tokens.tokens.json`](https://github.com/danielwang/onedesign/tree/main/src/design-tokens.tokens.json),
 exported from the nebulaONE Figma file. It follows the
 [Tokens Studio for Figma](https://docs.tokens.studio/) export format: a JSON object whose top-level keys
 are **token sets**, and whose leaf nodes are token objects shaped like:

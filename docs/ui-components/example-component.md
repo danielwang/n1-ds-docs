@@ -42,4 +42,4 @@ See the [Introduction](../overview/intro.md) guide for setup steps.
 
 Place images in the `static/img/` directory and reference them with an
 absolute path starting with `/img/...` so they resolve correctly even when
-the site is served from a subpath (such as GitHub Pages' `/n1-ds-docs/`).
+the site is served from a subpath (such as GitHub Pages' `/onedesign/`).
